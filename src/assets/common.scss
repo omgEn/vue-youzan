@@ -1,0 +1,15 @@
+$btn-primary: #155bd4;//深蓝色
+$theme-primary-5:#3773da;//浅蓝
+$theme-primary-1:#f8f8f8;//背景灰色
+$theme-primary-2:#969799;//字体灰
+
+.clearfix {
+    *zoom: 1;
+}
+.clearfix::after {
+    content: "";//伪元素一定要有这个
+    display: block;
+    height: 0;
+    overflow: hidden;//为了不被显示
+    clear: both;
+}
