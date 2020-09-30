@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function unique(array) {
+        var obj = {};
+        return array.filter(function(item, index, array) {
+          return obj.hasOwnProperty(typeof item + JSON.stringify(item))
+            ? false
+            : (obj[typeof item + JSON.stringify(item)] = true);
+        });
+      }
+      // var a = [{value:1},{value:1},1,"1",NaN,NaN,undefined,undefined,0,-0,[],[]]
+      unique2(a);
+
+      // 对于非复杂数据类型，1和"1",无效
+      function unique3(array) {
+        return [...new Set(array)];
+      }
+
+      // 深拷贝
+      function deepCopy(obj) {
+        if (typeof obj !== 'object') return;
+        var newObj = obj instanceof Array ? [] : {};
+        for (let key in obj) {
+          if (obj.hasOwnProperty(key)) {
+            newObj[key] =
+              typeof obj[key] === 'object' ? deepCopy(obj[key]) : obj[key];
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

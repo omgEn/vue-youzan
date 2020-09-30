@@ -11,7 +11,7 @@ export default{}
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/common.scss';
+// @import '@/assets/common.scss';
 .main {
 	// min-width: 860px;
 	// min-width: 100%;

@@ -1,8 +1,8 @@
 const goodStore = {
-	namespaced: true,
-	state:{
-		msg:'d',
-	}
-}
+  namespaced: true,
+  state: {
+    msg: 'd',
+  },
+};
 
-export default goodStore
+export default goodStore;

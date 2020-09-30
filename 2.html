@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  class XArray {
+    constructor(arr) {
+      this.arrayList = arr || [];
+      this.length = this.arrayList.length;
+    }
+    getArrayPush(x) {
+      if (x === undefined) return;
+      const pushArray = Array.from(arguments).slice();
+      for (let i = 0; i < pushArray.length; i++) {
+        this.arrayList[this.length + i] = pushArray[i];
+      }
+      this.length = this.arrayList.length;
+      return this.arrayList;
+    }
+    getArraySplice(x, y, z) {
+      const temp = JSON.parse(JSON.stringify(this.arrayList));
+      let deleteArray = [],
+        afterDeleteArray = [],
+        beforeDeleteArray = [],
+        addArray = [];
+      if (!x || typeof x !== 'number' || typeof y !== 'number') {
+        return;
+      }
+      x < 0 ? (Math.abs(x) > this.length ? (x = 0) : (x = this.length + x)) : x;
+      y !== undefined && y < 0 ? (y = 0) : y;
+      if (y !== undefined && typeof y === 'number') {
+        // 删除第二个参数以后的数据
+        if (x + y > this.length) {
+          deleteArray = temp.slice(x);
+          beforeDeleteArray = temp.slice(0, x);
+          this.arrayList = beforeDeleteArray;
+          this.length = x;
+        } else {
+          deleteArray = temp.slice(x, x + y);
+          afterDeleteArray = temp.slice(x + y, this.length + 1);
+          beforeDeleteArray = temp.slice(0, x);
+          this.arrayList = [...beforeDeleteArray, afterDeleteArray];
+          this.length = this.arrayList.length;
+        }
+      }
+      if (z !== undefined) {
+        // 要添加的数据
+        const addItems = Array.from(arguments).slice(2);
+        addArray = [].concat(addItems);
+        this.arrayList = [
+          ...beforeDeleteArray,
+          ...addArray,
+          ...afterDeleteArray,
+        ];
+      }
+      return deleteArray;
+    }
+  }
+  // 测试
+  const arr = [1, 2, 3, 4, 5];
+  const arrayObj = new XArray(arr);
+  arrayObj.getArrayPush(6, 7, 8); // [1,2,3,4,5,6,7,8]
+
+  const result = arrayObj.getArraySplice(-5, 3, 8);
+  console.log(arrayObj, result); // [1, 2, 3, 8, 7, 8] [4,5,6]
+  // const result = arrayObj.getArraySplice(1, 2, 9);
+  // console.log(arrayObj, result); //  [1, 9, 4, 5, 6, 7, 8]    [2, 3]
+
+  var a = [1, 2, 3, 4, 5, 6, 7, 8];
+  // a.splice(-5, 3, 8); // [1, 2, 3, 8, 7, 8] [4,5,6]
+  a.splice(1, 2, 9); // [1, 9, 4, 5, 6, 7, 8] [2, 3]
+</script>
