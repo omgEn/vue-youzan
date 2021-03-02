@@ -5,6 +5,10 @@ import ElementUi from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUi);
 
+import Vant from 'vant';
+import 'vant/lib/index.css';
+Vue.use(Vant);
+
 import router from './router.js';
 import store from './stores/store.js';
 import http from './utils/api';
